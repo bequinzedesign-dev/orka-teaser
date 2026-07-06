@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ORKA | SIAVS 2026</title>
+
+  <meta name="description" content="ORKA. Lançamento oficial na SIAVS 2026 em 04 de agosto de 2026." />
+  <meta property="og:title" content="ORKA | SIAVS 2026" />
+  <meta property="og:description" content="Lançamento oficial em 04 de agosto de 2026." />
+  <meta property="og:image" content="orka-poster.jpg" />
+
+  <style>
+    :root {
+      --white: #ffffff;
+      --muted: rgba(255, 255, 255, 0.72);
+      --soft: rgba(255, 255, 255, 0.48);
+      --line: rgba(255, 255, 255, 0.20);
+      --green: #13b981;
+      --blue: #1d4ed8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      background: #030303;
+      color: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      background: #030303 url("orka-poster.jpg") center / cover no-repeat;
+    }
+
+    .bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(1.05) contrast(1.08);
+      opacity: 1;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.03), transparent 36%),
+        linear-gradient(180deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.18) 48%, rgba(0,0,0,0.58) 100%),
+        linear-gradient(90deg, rgba(0,0,0,0.34), transparent 34%, transparent 66%, rgba(0,0,0,0.34));
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      opacity: 0.05;
+      z-index: 2;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(circle at center, black, transparent 84%);
+    }
+
+    main {
+      position: relative;
+      z-index: 3;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 22px;
+      text-align: center;
+    }
+
+    .content {
+      width: min(860px, 100%);
+      transform: translateY(3vh);
+      animation: enter 1s ease both;
+    }
+
+    .pretitle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+
+    .pretitle::before,
+    .pretitle::after {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    h1 {
+      font-size: clamp(58px, 11vw, 138px);
+      line-height: 0.86;
+      font-weight: 700;
+      letter-spacing: -0.075em;
+      text-transform: uppercase;
+      text-shadow: 0 22px 58px rgba(0,0,0,.82);
+    }
+
+    .date {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: clamp(14px, 1.6vw, 18px);
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+
+    .countdown {
+      width: min(680px, 100%);
+      margin: 34px auto 0;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(14px, 3vw, 34px);
+      flex-wrap: wrap;
+    }
+
+    .item {
+      min-width: 74px;
+    }
+
+    .number {
+      display: block;
+      font-size: clamp(28px, 5vw, 54px);
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      text-shadow: 0 14px 40px rgba(0,0,0,.8);
+    }
+
+    .label {
+      display: block;
+      margin-top: 8px;
+      color: var(--soft);
+      font-size: 10px;
+      line-height: 1;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .separator {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.45);
+      transform: translateY(-8px);
+    }
+
+    .signature {
+      margin-top: 26px;
+      color: rgba(255,255,255,.52);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .accent {
+      width: 116px;
+      height: 1px;
+      margin: 22px auto 0;
+      background: linear-gradient(90deg, transparent, var(--green), var(--blue), transparent);
+      opacity: .95;
+    }
+
+    @keyframes enter {
+      from {
+        opacity: 0;
+        transform: translateY(calc(3vh + 18px));
+      }
+      to {
+        opacity: 1;
+        transform: translateY(3vh);
+      }
+    }
+
+    @media (max-width: 680px) {
+      main {
+        padding: 34px 18px;
+      }
+
+      .content {
+        transform: translateY(5vh);
+      }
+
+      @keyframes enter {
+        from {
+          opacity: 0;
+          transform: translateY(calc(5vh + 18px));
+        }
+        to {
+          opacity: 1;
+          transform: translateY(5vh);
+        }
+      }
+
+      .pretitle {
+        font-size: 10px;
+        letter-spacing: 0.2em;
+      }
+
+      .pretitle::before,
+      .pretitle::after {
+        width: 22px;
+      }
+
+      .countdown {
+        gap: 13px;
+      }
+
+      .item {
+        min-width: 56px;
+      }
+
+      .separator {
+        display: none;
+      }
+
+      .date {
+        letter-spacing: 0.16em;
+      }
+
+      .signature {
+        line-height: 1.5;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background">
+    <video id="bgVideo" class="bg-video" autoplay muted loop playsinline preload="auto" poster="orka-poster.jpg">
+      <source src="orka-background.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <div class="overlay"></div>
+  <div class="grain"></div>
+
+  <main>
+    <section class="content" aria-label="Contagem regressiva para o lançamento da ORKA">
+      <div class="pretitle">Lançamento Kobra</div>
+
+      <h1 style="letter-spacing: 8px;">ORKA</h1>
+
+      <p class="date">04.08.2026</p>
+
+      <div class="countdown" role="timer" aria-live="polite">
+        <div class="item">
+          <span class="number" id="days">00</span>
+          <span class="label">Dias</span>
+        </div>
+
+        <span class="separator" aria-hidden="true"></span>
+
+        <div class="item">
+          <span class="number" id="hours">00</span>
+          <span class="label">Horas</span>
+        </div>
+
+        <span class="separator" aria-hidden="true"></span>
+
+        <div class="item">
+          <span class="number" id="minutes">00</span>
+          <span class="label">Min</span>
+        </div>
+
+        <span class="separator" aria-hidden="true"></span>
+
+        <div class="item">
+          <span class="number" id="seconds">00</span>
+          <span class="label">Seg</span>
+        </div>
+      </div>
+
+      <p class="signature">Revelação oficial no estande Kobra - SIAVS 2026</p>
+      <div class="accent"></div>
+    </section>
+  </main>
+
+  <script>
+    const launchDate = new Date("2026-08-04T00:00:00-03:00").getTime();
+
+    const video = document.getElementById("bgVideo");
+
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
+    function startVideo() {
+      video.play().catch(function () {
+        document.addEventListener("click", function () {
+          video.play();
+        }, { once: true });
+        document.addEventListener("touchstart", function () {
+          video.play();
+        }, { once: true });
+      });
+    }
+
+    startVideo();
+    document.addEventListener("DOMContentLoaded", startVideo);
+    window.addEventListener("load", startVideo);
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) startVideo();
+    });
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    function pad(value) {
+      return String(value).padStart(2, "0");
+    }
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      if (distance <= 0) {
+        daysEl.textContent = "00";
+        hoursEl.textContent = "00";
+        minutesEl.textContent = "00";
+        secondsEl.textContent = "00";
+        document.querySelector(".signature").textContent = "A ORKA foi revelada oficialmente na SIAVS 2026";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      daysEl.textContent = pad(days);
+      hoursEl.textContent = pad(hours);
+      minutesEl.textContent = pad(minutes);
+      secondsEl.textContent = pad(seconds);
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
